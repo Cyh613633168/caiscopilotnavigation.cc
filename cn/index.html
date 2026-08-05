@@ -217,11 +217,10 @@
     <!-- 锚点平滑移动 -->
     <script type="text/javascript">
     $(document).ready(function() {
-         //img lazy loaded
-         const observer = lozad();
-         observer.observe();
+         // load favicon images from data-src, without relying on lozad.js timing
          document.querySelectorAll('img.lazy[data-src]').forEach(function(img){
-             img.src = img.getAttribute('data-src');
+             var src = img.getAttribute('data-src');
+             if(src) img.src = src;
          });
 
         $(document).on('click', '.has-sub', function(){
