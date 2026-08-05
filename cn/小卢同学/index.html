@@ -9,7 +9,8 @@
 </head>
 <body>
     <div class="container">
-        <h2 id="category-title">小卢同学</h2>
+        <h2>小卢同学</h2>
+        <p>这里单独放“小卢同学”这个分类下的链接。</p>
         <p>栏目链接数量：<span id="link-count">0</span></p>
         <p><a href="../index.html">返回首页</a></p>
         <div class="row" id="links-list">
@@ -31,5 +32,21 @@
             });
         </script>
     </div>
+    <script>
+        // 自动为每个链接插入 favicon
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('#links-list .xe-user-name').forEach(function(a){
+                var href = a.getAttribute('href');
+                if(!href || href === '#') return;
+                try {
+                    var host = new URL(href, location.href).hostname;
+                    var img = document.createElement('img');
+                    img.src = 'https://www.google.com/s2/favicons?sz=64&domain=' + host;
+                    img.className = 'link-icon';
+                    a.insertBefore(img, a.firstChild);
+                } catch(e){}
+            });
+        });
+    </script>
 </body>
 </html>

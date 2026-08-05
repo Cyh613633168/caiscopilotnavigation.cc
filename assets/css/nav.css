@@ -65,3 +65,12 @@
 .img-circle {
     padding: 7px 0;
 }
+
+/* small favicon icon for link entries */
+.link-icon{
+    width:20px;
+    height:20px;
+    vertical-align:middle;
+    margin-right:8px;
+    border-radius:3px;
+}
