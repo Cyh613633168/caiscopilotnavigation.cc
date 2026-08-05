@@ -18,7 +18,7 @@
                 <div class="xe-widget xe-conversations box2 label-info">
                     <div class="xe-comment-entry">
                             <!-- 静态测试图标（调试用） -->
-                            <img src="../assets/images/favicon.png" class="link-icon" alt="GitHub">
+                            <img class="link-icon" src="../assets/images/favicon.png" data-src="https://t3.gstatic.cn/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=128&url=https://github.com" onerror="this.onerror=null;this.src='../assets/images/favicon.png';" alt="GitHub">
                             <div class="xe-comment">
                                 <a href="https://github.com" target="_blank" class="xe-user-name overflowClip_1"><strong>GitHub</strong></a>
                                 <p class="overflowClip_2">代码托管与协作平台 — GitHub。</p>
@@ -29,7 +29,7 @@
                 <div class="col-sm-6 link-item">
                     <div class="xe-widget xe-conversations box2 label-info">
                         <div class="xe-comment-entry">
-                            <img src="../assets/images/favicon.png" class="link-icon" alt="Google Scholar">
+                            <img class="link-icon" src="../assets/images/favicon.png" data-src="https://t3.gstatic.cn/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=128&url=https://scholar.google.com/" onerror="this.onerror=null;this.src='../assets/images/favicon.png';" alt="Google Scholar">
                             <div class="xe-comment">
                                 <a href="https://scholar.google.com/" target="_blank" class="xe-user-name overflowClip_1"><strong>Google Scholar</strong></a>
                                 <p class="overflowClip_2">学术搜索引擎 — Google Scholar。</p>
@@ -47,23 +47,9 @@
         </script>
     </div>
     <script>
-        // 将 favicon 插入到 .xe-comment-entry 内，配合现有 .xe-comment-entry img 浮动样式
         document.addEventListener('DOMContentLoaded', function(){
-            document.querySelectorAll('#links-list .xe-user-name').forEach(function(a){
-                var href = a.getAttribute('href');
-                if(!href || href === '#') return;
-                try {
-                    var host = new URL(href, location.href).hostname;
-                    var img = document.createElement('img');
-                    img.className = 'link-icon';
-                    img.src = 'https://www.google.com/s2/favicons?sz=64&domain=' + host;
-                    img.onerror = function() {
-                        this.onerror = null;
-                        this.src = '../assets/images/favicon.png';
-                    };
-                    var entry = a.closest('.xe-comment-entry');
-                    if(entry) entry.insertBefore(img, entry.firstChild);
-                } catch(e){}
+            document.querySelectorAll('#links-list img.link-icon[data-src]').forEach(function(img){
+                img.src = img.getAttribute('data-src');
             });
         });
     </script>
