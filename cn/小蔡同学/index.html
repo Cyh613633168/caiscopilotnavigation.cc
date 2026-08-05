@@ -33,7 +33,7 @@
         </script>
     </div>
     <script>
-        // 自动为每个链接插入 favicon
+        // 将 favicon 插入到 .xe-comment-entry 内，配合现有 .xe-comment-entry img 浮动样式
         document.addEventListener('DOMContentLoaded', function(){
             document.querySelectorAll('#links-list .xe-user-name').forEach(function(a){
                 var href = a.getAttribute('href');
@@ -43,7 +43,8 @@
                     var img = document.createElement('img');
                     img.src = 'https://www.google.com/s2/favicons?sz=64&domain=' + host;
                     img.className = 'link-icon';
-                    a.insertBefore(img, a.firstChild);
+                    var entry = a.closest('.xe-comment-entry');
+                    if(entry) entry.insertBefore(img, entry.firstChild);
                 } catch(e){}
             });
         });
