@@ -41,8 +41,12 @@
                 try {
                     var host = new URL(href, location.href).hostname;
                     var img = document.createElement('img');
-                    img.src = 'https://www.google.com/s2/favicons?sz=64&domain=' + host;
                     img.className = 'link-icon';
+                    img.src = 'https://www.google.com/s2/favicons?sz=64&domain=' + host;
+                    img.onerror = function() {
+                        this.onerror = null;
+                        this.src = '../assets/images/favicon.png';
+                    };
                     var entry = a.closest('.xe-comment-entry');
                     if(entry) entry.insertBefore(img, entry.firstChild);
                 } catch(e){}
