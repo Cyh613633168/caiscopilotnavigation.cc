@@ -135,6 +135,19 @@
 
             </nav>
             <!-- 自定义分类 -->
+            <div class="search-block">
+                <div class="search-tabs">
+                    <a href="#" class="search-tab active" data-engine="baidu" data-placeholder="百度一下">百度</a>
+                    <a href="#" class="search-tab" data-engine="google" data-placeholder="Google">Google</a>
+                    <a href="#" class="search-tab" data-engine="site" data-placeholder="站内搜索">站内</a>
+                    <a href="#" class="search-tab" data-engine="taobao" data-placeholder="淘宝">淘宝</a>
+                    <a href="#" class="search-tab" data-engine="bing" data-placeholder="Bing">Bing</a>
+                </div>
+                <div class="search-box">
+                    <input id="search-input" type="text" class="form-control" placeholder="百度一下" />
+                    <button id="search-btn" class="btn btn-dark" type="button">搜索</button>
+                </div>
+            </div>
             <div class="link-section" id="小卢同学">
                 <h4>小卢同学</h4>
                 <div class="row">
@@ -207,6 +220,9 @@
          //img lazy loaded
          const observer = lozad();
          observer.observe();
+         document.querySelectorAll('img.lazy[data-src]').forEach(function(img){
+             img.src = img.getAttribute('data-src');
+         });
 
         $(document).on('click', '.has-sub', function(){
             var _this = $(this)
@@ -226,6 +242,28 @@
                 })
             }
         })
+        $('#search-btn').click(function(){
+            var input = document.getElementById('search-input');
+            var query = input.value.trim();
+            if(!query) return;
+            var engine = document.querySelector('.search-tab.active').getAttribute('data-engine');
+            var url;
+            switch(engine){
+                case 'google': url = 'https://www.google.com/search?q=' + encodeURIComponent(query); break;
+                case 'site': url = 'https://www.baidu.com/s?wd=' + encodeURIComponent('site:' + location.host + ' ' + query); break;
+                case 'taobao': url = 'https://s.taobao.com/search?q=' + encodeURIComponent(query); break;
+                case 'bing': url = 'https://cn.bing.com/search?q=' + encodeURIComponent(query); break;
+                default: url = 'https://www.baidu.com/s?wd=' + encodeURIComponent(query); break;
+            }
+            window.open(url, '_blank');
+        });
+        $('.search-tab').click(function(e){
+            e.preventDefault();
+            $('.search-tab').removeClass('active');
+            $(this).addClass('active');
+            var placeholder = $(this).attr('data-placeholder');
+            $('#search-input').attr('placeholder', placeholder);
+        });
         $('.user-info-menu .hidden-sm').click(function(){
             if($('.sidebar-menu').hasClass('collapsed')) {
                 $('.has-sub.expanded > ul').attr("style","")
