@@ -263,8 +263,6 @@
             </div>
 
         </div>
-
-        <!-- 脚本 1：统计卡片数量 -->
         <script>
             document.addEventListener('DOMContentLoaded', function(){
                 var count = document.querySelectorAll('#links-list .link-item').length;
@@ -272,11 +270,8 @@
             });
         </script>
     </div>
-
-    <!-- 脚本 2：把 data-src 中的图标渲染出来，国内网络流畅直连 -->
     <script>
         document.addEventListener('DOMContentLoaded', function(){
-            // 读取 HTML 中的 data-src 并替换为正式图标 src
             document.querySelectorAll('#links-list img.link-icon[data-src]').forEach(function(img){
                 img.src = img.getAttribute('data-src');
             });
